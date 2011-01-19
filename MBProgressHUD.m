@@ -354,7 +354,10 @@
         // Add details label delatils text was set
         if (nil != self.detailsLabelText) {
             // Get size of label text
-            dims = [self.detailsLabelText sizeWithFont:self.detailsLabelFont];
+            //dims = [self.detailsLabelText sizeWithFont:self.detailsLabelFont];
+			dims = [self.detailsLabelText sizeWithFont:self.detailsLabelFont constrainedToSize:CGSizeMake(frame.size.width-(2*margin), 120.0f) lineBreakMode:UILineBreakModeWordWrap];
+			
+			LogDebug(@"dims.height: %f", dims.height);
 			
             // Compute label dimensions based on font metrics if size is larger than max then clip the label width
             lHeight = dims.height;
@@ -368,6 +371,7 @@
             // Set label properties
             detailsLabel.font = self.detailsLabelFont;
             detailsLabel.adjustsFontSizeToFitWidth = NO;
+			detailsLabel.numberOfLines = 5;
             detailsLabel.textAlignment = UITextAlignmentCenter;
             detailsLabel.opaque = NO;
             detailsLabel.backgroundColor = [UIColor clearColor];
